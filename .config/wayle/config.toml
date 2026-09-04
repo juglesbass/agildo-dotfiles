@@ -1,0 +1,181 @@
+imports = []
+
+[general]
+font-sans = "SF Pro Text"
+font-mono = "JetBrains Mono"
+tearing-mode = false
+
+[bar]
+scale = 1.0
+inset-edge = 0.0
+inset-ends = 0.0
+padding = 0.25
+padding-ends = 0.5
+module-gap = 0.4
+location = "top"
+exclusive = true
+layer = "top"
+bg = "#1e222a"
+background-opacity = 95
+border-location = "none"
+border-width = 1
+border-color = "border-accent"
+rounding = "none"
+shadow = "none"
+button-variant = "basic"
+button-opacity = 100
+button-bg-opacity = 100
+button-icon-size = 1.0
+button-icon-padding = 0.8
+button-label-size = 0.95
+button-label-weight = "semibold"
+button-label-padding = 0.8
+button-rounding = "full"
+button-gap = 0.5
+button-icon-position = "start"
+button-border-location = "none"
+button-border-width = 0
+button-group-border-location = "none"
+button-group-border-width = 0
+button-group-padding = 0.0
+button-group-module-gap = 0.3
+button-group-background = "#11111b"
+button-group-opacity = 100
+button-group-border-color = "border-accent"
+button-group-rounding = "full"
+dropdown-shadow = true
+dropdown-opacity = 100
+dropdown-autohide = true
+dropdown-freeze-label = true
+
+[[bar.layout]]
+monitor = "*"
+show = true
+left = [
+    "dashboard",
+    "weather",
+]
+center = [
+    "clock",
+    "hyprland-workspaces",
+]
+right = [
+    "volume",
+    "network",
+    "battery",
+    "notifications",
+]
+
+[styling]
+scale = 1.0
+rounding = "full"
+theme-provider = "wayle"
+matugen-scheme = "tonal-spot"
+
+[styling.palette]
+bg = "#141420"
+surface = "#1e222a"
+elevated = "#11111b"
+fg = "#cdd6f4"
+fg-muted = "#6c7086"
+primary = "#89b4fa"
+red = "#f38ba8"
+yellow = "#f9e2af"
+green = "#a6e3a1"
+blue = "#89b4fa"
+
+[modules]
+
+[modules.dashboard]
+icon-override = "si-archlinux-symbolic"
+border-show = false
+icon-color = "#cdd6f4"
+button-bg-color = "#11111b"
+left-click = "dropdown:dashboard"
+
+[modules.weather]
+provider = "open-meteo"
+location = "Manaus"
+units = "metric"
+format = "{{ temp }}°C"
+icon-name = "weather-clear-symbolic"
+border-show = false
+icon-show = true
+icon-color = "#f38ba8"
+label-show = true
+label-color = "#f38ba8"
+button-bg-color = "#11111b"
+left-click = "dropdown:weather"
+
+[modules.clock]
+format = "%I:%M %p"
+icon-show = false
+border-show = false
+label-show = true
+label-color = "#89b4fa"
+button-bg-color = "#11111b"
+left-click = "dropdown:calendar"
+
+[modules.hyprland-workspaces]
+min-workspace-count = 5
+workspace-ignore = ["99"]
+monitor-specific = true
+show-special = false
+urgent-show = true
+display-mode = "icon"
+app-icons-show = false
+icon-size = 0.9
+label-size = 0.9
+active-indicator = "background"
+active-color = "#89b4fa"
+occupied-color = "#585b70"
+empty-color = "#313244"
+container-bg-color = "#11111b"
+border-show = false
+
+
+[modules.hyprland-workspaces.workspace-map]
+1 = { icon = "ld-terminal-symbolic" }
+2 = { icon = "tbf-circle-symbolic" }
+3 = { icon = "tbf-circle-symbolic" }
+4 = { icon = "tbf-circle-symbolic" }
+5 = { icon = "tbf-circle-symbolic" }
+
+[modules.volume]
+border-show = false
+icon-show = true
+icon-color = "#f9e2af"
+label-show = true
+label-color = "#f9e2af"
+format = "{{ percent }}%"
+button-bg-color = "#11111b"
+left-click = "dropdown:audio"
+
+[modules.network]
+border-show = false
+icon-show = true
+icon-color = "#cba6f7"
+label-show = true
+label-color = "#cba6f7"
+label-max-length = 15
+button-bg-color = "#11111b"
+left-click = "dropdown:network"
+
+[modules.battery]
+border-show = false
+icon-show = true
+icon-color = "#a6e3a1"
+label-show = true
+label-color = "#a6e3a1"
+format = "{{ percent }}%"
+button-bg-color = "#11111b"
+left-click = "dropdown:battery"
+
+[modules.notifications]
+icon-name = "ld-bell-symbolic"
+border-show = false
+icon-show = true
+icon-color = "#cdd6f4"
+label-show = false
+button-bg-color = "#11111b"
+left-click = "dropdown:notification"
