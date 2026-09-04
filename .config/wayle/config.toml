@@ -60,9 +60,11 @@ center = [
     "hyprland-workspaces",
 ]
 right = [
+    "cpu",
+    "custom-gpu-temp",
+    "ram",
     "volume",
     "network",
-    "battery",
     "notifications",
 ]
 
@@ -133,13 +135,48 @@ empty-color = "#313244"
 container-bg-color = "#11111b"
 border-show = false
 
-
 [modules.hyprland-workspaces.workspace-map]
 1 = { icon = "ld-terminal-symbolic" }
 2 = { icon = "tbf-circle-symbolic" }
 3 = { icon = "tbf-circle-symbolic" }
 4 = { icon = "tbf-circle-symbolic" }
 5 = { icon = "tbf-circle-symbolic" }
+
+[modules.cpu]
+poll-interval-ms = 2000
+temp-sensor = "Tctl"
+format = "{{ temp_c }}°C"
+icon-name = "ld-cpu-symbolic"
+border-show = false
+icon-show = true
+icon-color = "#74c7ec"
+label-show = true
+label-color = "#74c7ec"
+button-bg-color = "#11111b"
+
+[[modules.custom]]
+id = "gpu-temp"
+command = "awk '{printf \"%d°C\", $1/1000}' /sys/class/drm/card*/device/hwmon/hwmon*/temp1_input 2>/dev/null"
+interval-ms = 2000
+format = "{{ output }}"
+icon-name = "si-amd-symbolic"
+icon-show = true
+icon-color = "#f38ba8"
+label-show = true
+label-color = "#f38ba8"
+button-bg-color = "#11111b"
+border-show = false
+
+[modules.ram]
+poll-interval-ms = 2000
+format = "{{ used_gib }}G"
+icon-name = "ld-memory-stick-symbolic"
+border-show = false
+icon-show = true
+icon-color = "#a6e3a1"
+label-show = true
+label-color = "#a6e3a1"
+button-bg-color = "#11111b"
 
 [modules.volume]
 border-show = false
@@ -160,16 +197,6 @@ label-color = "#cba6f7"
 label-max-length = 15
 button-bg-color = "#11111b"
 left-click = "dropdown:network"
-
-[modules.battery]
-border-show = false
-icon-show = true
-icon-color = "#a6e3a1"
-label-show = true
-label-color = "#a6e3a1"
-format = "{{ percent }}%"
-button-bg-color = "#11111b"
-left-click = "dropdown:battery"
 
 [modules.notifications]
 icon-name = "ld-bell-symbolic"

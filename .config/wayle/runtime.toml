@@ -1,0 +1,23 @@
+[bar]
+scale = 0.8500000238418579
+background-opacity = 10
+
+[[bar.layout]]
+monitor = "*"
+show = true
+left = [
+    "dashboard",
+    "weather",
+]
+center = [
+    "clock",
+    "hyprland-workspaces",
+]
+right = [
+    "cpu",
+    "custom-gpu-temp",
+    "ram",
+    "volume",
+    "network",
+    "notifications",
+]
