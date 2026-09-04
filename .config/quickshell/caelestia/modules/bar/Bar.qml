@@ -72,6 +72,8 @@ ColumnLayout {
             popouts.currentName = id.toLowerCase();
             popouts.currentCenter = (ch.item as Item).mapToItem(root, 0, (ch.item as Item).implicitHeight / 2).y ?? 0;
             popouts.hasCurrent = true;
+        } else {
+            popouts.hasCurrent = false;
         }
     }
 
@@ -107,7 +109,18 @@ ColumnLayout {
         id: repeater
 
         model: ScriptModel {
-            values: root.Config.bar.entries.values.filter(e => e.enabled)
+            values: {
+                const list = [...root.Config.bar.entries.values.filter(e => e.enabled)];
+                if (!list.some(e => e.id === "hwmon")) {
+                    const idx = list.findIndex(e => e.id === "statusIcons");
+                    if (idx !== -1) {
+                        list.splice(idx, 0, { id: "hwmon", enabled: true });
+                    } else {
+                        list.push({ id: "hwmon", enabled: true });
+                    }
+                }
+                return list;
+            }
         }
 
         DelegateChooser {
@@ -160,6 +173,14 @@ ColumnLayout {
                 delegate: EntryWrapper {
                     Clock {
                         objectName: "taskbarClock"
+                    }
+                }
+            }
+            DelegateChoice {
+                roleValue: "hwmon"
+                delegate: EntryWrapper {
+                    HwMonitor {
+                        objectName: "taskbarHwMon"
                     }
                 }
             }

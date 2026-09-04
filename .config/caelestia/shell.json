@@ -17,7 +17,7 @@
             "showDate": true
         },
         "dragThreshold": 20,
-        "persistent": false,
+        "persistent": true,
         "popouts": {
             "statusIcons": true
         },
@@ -64,8 +64,9 @@
         },
         "workspaces": {
             "activeTrail": false,
-            "maxWindowIcons": 5,
-            "occupiedBg": false
+            "maxWindowIcons": 0,
+            "occupiedBg": false,
+            "shown": 1
         }
     },
     "border": {
