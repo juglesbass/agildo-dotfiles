@@ -57,7 +57,15 @@ case "$TARGET" in
         sed -i -E 's/^[# ]*exec-once\s*=\s*qs -c caelestia/# exec-once = qs -c caelestia/' ~/.config/hypr/hyprland.conf
         sed -i -E 's/^[# ]*exec-once\s*=\s*waybar/# exec-once = waybar/' ~/.config/hypr/hyprland.conf
         sed -i -E 's/^[# ]*exec-once\s*=\s*wayle shell/exec-once = wayle shell/' ~/.config/hypr/hyprland.conf
-        echo "✅ Wayle ativado!"
+        # 4. Sincronizar wallpaper no Wayle para puxar as cores imediatamente
+        (
+            sleep 1
+            WALL=$(cat "$HOME/.local/state/caelestia/wallpaper/path.txt" 2>/dev/null)
+            if [ -n "$WALL" ] && [ -f "$WALL" ]; then
+                wayle wallpaper set "$WALL" >/dev/null 2>&1 || true
+            fi
+        ) &
+        echo "✅ Wayle ativado com cores do wallpaper!"
         ;;
 
     caelestia)

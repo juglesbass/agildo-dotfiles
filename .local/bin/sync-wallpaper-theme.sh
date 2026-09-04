@@ -19,3 +19,8 @@ if [ -f "$HOME/.local/state/caelestia/scheme.json" ]; then
         hyprctl keyword general:col.active_border "rgba(${PRIMARY}ee) rgba(${SECONDARY}ee) 45deg" >/dev/null 2>&1
     fi
 fi
+
+# 4. Sincronizar cores dinâmicas no Wayle (se estiver rodando)
+if pgrep -x wayle >/dev/null; then
+    wayle wallpaper set "$WALL" >/dev/null 2>&1 || true
+fi

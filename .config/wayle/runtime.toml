@@ -1,23 +1,178 @@
-[bar]
-scale = 0.8500000238418579
-background-opacity = 10
+[general]
+font-sans = "SF Pro Text"
+font-mono = "JetBrains Mono"
+tearing-mode = false
 
-[[bar.layout]]
-monitor = "*"
-show = true
-left = [
-    "dashboard",
-    "weather",
-]
-center = [
-    "clock",
-    "hyprland-workspaces",
-]
-right = [
-    "cpu",
-    "custom-gpu-temp",
-    "ram",
-    "volume",
-    "network",
-    "notifications",
-]
+[bar]
+inset-edge = 0.0
+inset-ends = 0.0
+padding = 0.25
+padding-ends = 0.5
+module-gap = 0.4000000059604645
+location = "top"
+exclusive = true
+layer = "top"
+background-opacity = 15
+rounding = "none"
+shadow = "none"
+button-variant = "basic"
+button-opacity = 100
+button-bg-opacity = 100
+button-icon-size = 1.0
+button-icon-padding = 0.800000011920929
+button-label-size = 0.949999988079071
+button-label-weight = "semibold"
+button-label-padding = 0.800000011920929
+button-rounding = "full"
+button-gap = 0.5
+button-icon-position = "start"
+button-border-location = "none"
+button-border-width = 0
+button-group-border-location = "none"
+button-group-border-width = 0
+button-group-padding = 0.0
+button-group-module-gap = 0.30000001192092896
+button-group-rounding = "full"
+dropdown-shadow = true
+dropdown-opacity = 100
+dropdown-autohide = true
+dropdown-freeze-label = true
+
+[styling]
+scale = 1.0
+rounding = "full"
+theme-provider = "matugen"
+theming-monitor = "HDMI-A-1"
+matugen-scheme = "tonal-spot"
+matugen-source-color = 0
+
+[modules.clock]
+format = "%I:%M %p"
+border-show = false
+icon-show = false
+label-show = true
+label-color = "accent"
+left-click = "dropdown:calendar"
+
+[modules.cpu]
+poll-interval-ms = 2000
+temp-sensor = "Tctl"
+format = "{{ temp_c }}°C"
+icon-name = "ld-cpu-symbolic"
+border-show = false
+icon-show = true
+icon-color = "blue"
+label-show = true
+label-color = "blue"
+
+[modules.dashboard]
+icon-override = "si-archlinux-symbolic"
+border-show = false
+icon-color = "accent"
+left-click = "dropdown:dashboard"
+
+[modules.hyprland-workspaces]
+min-workspace-count = 5
+monitor-specific = true
+show-special = false
+urgent-show = true
+display-mode = "icon"
+app-icons-show = false
+icon-size = 0.8999999761581421
+label-size = 0.8999999761581421
+workspace-ignore = ["99"]
+active-indicator = "background"
+active-color = "accent"
+occupied-color = "fg-muted"
+empty-color = "fg-subtle"
+container-bg-color = "bg-elevated"
+border-show = false
+
+[modules.hyprland-workspaces.workspace-map.1]
+icon = "ld-terminal-symbolic"
+
+[modules.hyprland-workspaces.workspace-map.2]
+icon = "tbf-circle-symbolic"
+
+[modules.hyprland-workspaces.workspace-map.3]
+icon = "tbf-circle-symbolic"
+
+[modules.hyprland-workspaces.workspace-map.4]
+icon = "tbf-circle-symbolic"
+
+[modules.hyprland-workspaces.workspace-map.5]
+icon = "tbf-circle-symbolic"
+
+[modules.network]
+border-show = false
+icon-show = true
+icon-color = "accent"
+label-show = true
+label-color = "accent"
+label-max-length = 15
+left-click = "dropdown:network"
+
+[modules.notifications]
+icon-name = "ld-bell-symbolic"
+border-show = false
+icon-show = true
+icon-color = "fg-default"
+label-show = false
+left-click = "dropdown:notification"
+
+[modules.ram]
+poll-interval-ms = 2000
+format = "{{ used_gib }}G"
+icon-name = "ld-memory-stick-symbolic"
+border-show = false
+icon-show = true
+icon-color = "green"
+label-show = true
+label-color = "green"
+
+[modules.volume]
+border-show = false
+icon-show = true
+icon-color = "yellow"
+label-show = true
+label-color = "yellow"
+format = "{{ percent }}%"
+left-click = "dropdown:audio"
+
+[modules.weather]
+provider = "open-meteo"
+location = "Manaus"
+units = "metric"
+format = "{{ temp }}°C"
+icon-name = "weather-clear-symbolic"
+border-show = false
+icon-show = true
+icon-color = "red"
+label-show = true
+label-color = "red"
+left-click = "dropdown:weather"
+
+[[modules.custom]]
+id = "gpu-temp"
+command = """awk '{printf "%d°C", $1/1000}' /sys/class/drm/card*/device/hwmon/hwmon*/temp1_input 2>/dev/null"""
+mode = "poll"
+interval-ms = 2000
+restart-policy = "never"
+restart-interval-ms = 1000
+format = "{{ output }}"
+hide-if-empty = false
+icon-name = "si-amd-symbolic"
+icon-show = true
+icon-color = "red"
+icon-bg-color = "auto"
+label-show = true
+label-color = "red"
+label-max-length = 0
+button-bg-color = "bg-surface-elevated"
+border-show = false
+border-color = "auto"
+left-click = ""
+right-click = ""
+middle-click = ""
+scroll-up = ""
+scroll-down = ""

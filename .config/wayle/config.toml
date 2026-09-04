@@ -6,7 +6,7 @@ font-mono = "JetBrains Mono"
 tearing-mode = false
 
 [bar]
-scale = 1.0
+scale = 0.85
 inset-edge = 0.0
 inset-ends = 0.0
 padding = 0.25
@@ -15,11 +15,7 @@ module-gap = 0.4
 location = "top"
 exclusive = true
 layer = "top"
-bg = "#1e222a"
-background-opacity = 95
-border-location = "none"
-border-width = 1
-border-color = "border-accent"
+background-opacity = 15
 rounding = "none"
 shadow = "none"
 button-variant = "basic"
@@ -39,9 +35,6 @@ button-group-border-location = "none"
 button-group-border-width = 0
 button-group-padding = 0.0
 button-group-module-gap = 0.3
-button-group-background = "#11111b"
-button-group-opacity = 100
-button-group-border-color = "border-accent"
 button-group-rounding = "full"
 dropdown-shadow = true
 dropdown-opacity = 100
@@ -71,28 +64,17 @@ right = [
 [styling]
 scale = 1.0
 rounding = "full"
-theme-provider = "wayle"
+theme-provider = "matugen"
+theming-monitor = "HDMI-A-1"
 matugen-scheme = "tonal-spot"
-
-[styling.palette]
-bg = "#141420"
-surface = "#1e222a"
-elevated = "#11111b"
-fg = "#cdd6f4"
-fg-muted = "#6c7086"
-primary = "#89b4fa"
-red = "#f38ba8"
-yellow = "#f9e2af"
-green = "#a6e3a1"
-blue = "#89b4fa"
+matugen-source-color = 0
 
 [modules]
 
 [modules.dashboard]
 icon-override = "si-archlinux-symbolic"
 border-show = false
-icon-color = "#cdd6f4"
-button-bg-color = "#11111b"
+icon-color = "accent"
 left-click = "dropdown:dashboard"
 
 [modules.weather]
@@ -103,10 +85,9 @@ format = "{{ temp }}°C"
 icon-name = "weather-clear-symbolic"
 border-show = false
 icon-show = true
-icon-color = "#f38ba8"
+icon-color = "red"
 label-show = true
-label-color = "#f38ba8"
-button-bg-color = "#11111b"
+label-color = "red"
 left-click = "dropdown:weather"
 
 [modules.clock]
@@ -114,8 +95,7 @@ format = "%I:%M %p"
 icon-show = false
 border-show = false
 label-show = true
-label-color = "#89b4fa"
-button-bg-color = "#11111b"
+label-color = "accent"
 left-click = "dropdown:calendar"
 
 [modules.hyprland-workspaces]
@@ -129,10 +109,10 @@ app-icons-show = false
 icon-size = 0.9
 label-size = 0.9
 active-indicator = "background"
-active-color = "#89b4fa"
-occupied-color = "#585b70"
-empty-color = "#313244"
-container-bg-color = "#11111b"
+active-color = "accent"
+occupied-color = "fg-muted"
+empty-color = "fg-subtle"
+container-bg-color = "bg-elevated"
 border-show = false
 
 [modules.hyprland-workspaces.workspace-map]
@@ -149,10 +129,9 @@ format = "{{ temp_c }}°C"
 icon-name = "ld-cpu-symbolic"
 border-show = false
 icon-show = true
-icon-color = "#74c7ec"
+icon-color = "blue"
 label-show = true
-label-color = "#74c7ec"
-button-bg-color = "#11111b"
+label-color = "blue"
 
 [[modules.custom]]
 id = "gpu-temp"
@@ -161,10 +140,9 @@ interval-ms = 2000
 format = "{{ output }}"
 icon-name = "si-amd-symbolic"
 icon-show = true
-icon-color = "#f38ba8"
+icon-color = "red"
 label-show = true
-label-color = "#f38ba8"
-button-bg-color = "#11111b"
+label-color = "red"
 border-show = false
 
 [modules.ram]
@@ -173,36 +151,32 @@ format = "{{ used_gib }}G"
 icon-name = "ld-memory-stick-symbolic"
 border-show = false
 icon-show = true
-icon-color = "#a6e3a1"
+icon-color = "green"
 label-show = true
-label-color = "#a6e3a1"
-button-bg-color = "#11111b"
+label-color = "green"
 
 [modules.volume]
 border-show = false
 icon-show = true
-icon-color = "#f9e2af"
+icon-color = "yellow"
 label-show = true
-label-color = "#f9e2af"
+label-color = "yellow"
 format = "{{ percent }}%"
-button-bg-color = "#11111b"
 left-click = "dropdown:audio"
 
 [modules.network]
 border-show = false
 icon-show = true
-icon-color = "#cba6f7"
+icon-color = "accent"
 label-show = true
-label-color = "#cba6f7"
+label-color = "accent"
 label-max-length = 15
-button-bg-color = "#11111b"
 left-click = "dropdown:network"
 
 [modules.notifications]
 icon-name = "ld-bell-symbolic"
 border-show = false
 icon-show = true
-icon-color = "#cdd6f4"
+icon-color = "fg-default"
 label-show = false
-button-bg-color = "#11111b"
 left-click = "dropdown:notification"
