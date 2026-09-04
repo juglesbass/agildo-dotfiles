@@ -1,0 +1,33 @@
+! ============================================================================
+!  Xresources — DPI e renderização de fontes para clientes X11 (XWayland)
+!  Carregado por: exec-once = xrdb -merge ~/.config/hypr/Xresources
+! ============================================================================
+!
+!  Por que este arquivo existe:
+!  O hyprland.conf usa `xwayland { force_zero_scaling = true }`, o que faz o
+!  XWayland receber escala 1 — o compositor não amplia apps X11 (imagem nítida,
+!  mas cada app precisa se escalar sozinho). O Xft.dpi abaixo é a instrução que
+!  Qt, Java, Tk, GTK-X11 e toolkits legados leem para se ampliar corretamente.
+!
+!  Apps Wayland NATIVOS não leem estas propriedades, então não há risco de
+!  escala dupla. É justamente por isso que se usa Xft.dpi aqui em vez de
+!  QT_SCALE_FACTOR (que afetaria Wayland também e daria 2 × 2 = 4x).
+!
+!  192 = 96 × 2.0, casando com a escala do monitor.
+!  Se um dia mudar a escala do monitor, mude aqui também:
+!      escala 1.0 -> 96    |  escala 1.5 -> 144
+!      escala 2.0 -> 192   |  escala 2.5 -> 240
+! ============================================================================
+
+Xft.dpi:        192
+
+! ---- Renderização de fontes -------------------------------------------------
+Xft.antialias:  true
+Xft.hinting:    true
+Xft.hintstyle:  hintslight
+Xft.rgba:       rgb
+Xft.lcdfilter:  lcddefault
+
+! ---- Cursor (mantém coerência com XCURSOR_* do hyprland.conf) --------------
+Xcursor.theme:  catppuccin-mocha-blue-cursors
+Xcursor.size:   32

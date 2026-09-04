@@ -1,0 +1,19 @@
+# Backups e arquivos temporários
+*.bak*
+*~
+*.swp
+*.tmp
+*.log
+*.qslog
+.DS_Store
+
+# Bibliotecas compiladas e binários
+*.so
+*.o
+*.a
+*.AppImage
+
+# Configurações locais / segredos
+*.local.json
+.git-credentials
+.claude/
