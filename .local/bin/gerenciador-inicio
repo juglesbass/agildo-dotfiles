@@ -1,0 +1,3 @@
+#!/bin/bash
+# Abre o Gerenciador Gráfico de Inicialização do Sistema
+kcmshell6 kcm_autostart

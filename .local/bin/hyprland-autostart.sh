@@ -37,6 +37,9 @@ if ! pgrep -f "cliphist store" >/dev/null; then
     wl-paste --watch cliphist store >/dev/null 2>&1 &
 fi
 
+# 🚀 Aplicativos gráficos de inicialização (~/.config/autostart/)
+~/.local/bin/run-autostart.py &
+
 # Ensure Waybar and AgildoDock systemd services are running.
 # O reset-failed limpa qualquer estado de falha herdado de uma tentativa
 # anterior; sem ele, se a unidade tivesse estourado o StartLimitBurst, o

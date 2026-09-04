@@ -61,16 +61,23 @@ PageBase {
 
         // Library
         SectionHeader {
-            text: qsTr("Biblioteca")
+            text: qsTr("Biblioteca e Inicialização")
         }
 
         NavRow {
             first: true
-            last: true
             icon: "apps"
             text: qsTr("Todos os aplicativos")
             subtext: qsTr("Navegar por apps instalados, favoritos e ocultos")
             onClicked: root.nState.openSubPage(1)
+        }
+
+        NavRow {
+            last: true
+            icon: "rocket_launch"
+            text: qsTr("Aplicativos de inicialização")
+            subtext: qsTr("Gerenciar programas que iniciam com o sistema")
+            onClicked: Quickshell.execDetached(["/home/agildo/.local/bin/gerenciador-inicio"])
         }
     }
 
