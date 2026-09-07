@@ -165,23 +165,29 @@ ShellRoot {
         return "rainy";
     }
 
+    // Descricoes em portugues do Brasil. A primeira versao usava termos de
+    // Portugal -- "Encoberto", "Aguaceiros", "Nevoeiro" -- que sao corretos
+    // mas nao e' como se fala aqui.
     function wxText(code) {
         switch (code) {
         case 0:  return "Céu limpo";
-        case 1:  return "Predominantemente limpo";
+        case 1:  return "Poucas nuvens";
         case 2:  return "Parcialmente nublado";
-        case 3:  return "Encoberto";
-        case 45: case 48: return "Nevoeiro";
-        case 51: case 53: case 55: return "Chuvisco";
-        case 56: case 57: return "Chuvisco gelado";
-        case 61: case 63: case 65: return "Chuva";
-        case 66: case 67: return "Chuva gelada";
+        case 3:  return "Nublado";
+        case 45: case 48: return "Neblina";
+        case 51: case 53: case 55: return "Garoa";
+        case 56: case 57: return "Garoa congelante";
+        case 61: return "Chuva fraca";
+        case 63: return "Chuva";
+        case 65: return "Chuva forte";
+        case 66: case 67: return "Chuva congelante";
         case 71: case 73: case 75: return "Neve";
-        case 77: return "Grãos de neve";
-        case 80: case 81: case 82: return "Aguaceiros";
-        case 85: case 86: return "Aguaceiros de neve";
-        case 95: return "Trovoada";
-        case 96: case 99: return "Trovoada com granizo";
+        case 77: return "Granizo fino";
+        case 80: case 81: return "Pancadas de chuva";
+        case 82: return "Pancadas fortes";
+        case 85: case 86: return "Pancadas de neve";
+        case 95: return "Tempestade";
+        case 96: case 99: return "Tempestade com granizo";
         default: return "--";
         }
     }
