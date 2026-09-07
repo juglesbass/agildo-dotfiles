@@ -17,3 +17,10 @@
 *.local.json
 .git-credentials
 .claude/
+
+# Estado, nao configuracao: qual shell esta activo no momento.
+# O switch-shell.sh recria este symlink.
+.config/hypr/shells/active.conf
+
+# Gerado do wallpaper pelo waybar-ml4w-colors.sh a cada troca.
+.config/waybar-ml4w/colors.css

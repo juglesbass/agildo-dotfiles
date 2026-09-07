@@ -1,0 +1,69 @@
+// ===========================================================================
+// Waybar — tema ML4W "modern", adaptado para este setup
+// ===========================================================================
+// Origem: github.com/mylinuxforwork/dotfiles (themes/ml4w-modern)
+//
+// O QUE FOI MUDADO EM RELACAO AO ORIGINAL
+// ---------------------------------------
+// 1. Os `include` do ML4W apontavam para ~/.config/waybar/modules.json --
+//    CAMINHO ABSOLUTO para a sua pasta waybar. Copiado cru, o ML4W teria
+//    sequestrado a sua config atual. Agora apontam para esta pasta.
+// 2. Os modulos que chamavam scripts do ML4W (~/.config/ml4w/...) e do setup
+//    hypr dele (~/.config/hypr/scripts/...) foram repontados para as
+//    ferramentas que voce ja' tem: rofi, dolphin, pavucontrol, btop,
+//    nm-connection-editor, bluetoothctl, cliphist, wlogout, makoctl.
+// 3. Removidos os modulos sem equivalente aqui: custom/ml4w-welcome
+//    (app com.ml4w.welcome), custom/hypridle e custom/hyprshade.
+// 4. custom/notification usava swaync; trocado por makoctl, que e' o daemon
+//    de notificacao que sobe junto desta barra.
+//
+// NENHUM ATALHO DE TECLADO FOI TOCADO. Config de waybar nao define keybind do
+// Hyprland -- ela so' tem acoes de clique dentro da propria barra. Os seus
+// binds continuam todos em ~/.config/hypr/hyprland.conf.
+//
+// As cores vem de colors.css, gerado do SEU ~/.config/hypr/scheme/current.conf
+// por ~/.local/bin/waybar-ml4w-colors.sh (roda sozinho ao ativar este shell).
+//
+// Trocar de tema: baixe outro themes/<nome>/style.css do repo do ML4W por cima
+// de style.css. Os modulos daqui continuam valendo.
+{
+    "layer": "top",
+    "margin-top": 0,
+    "margin-bottom": 0,
+    "margin-left": 0,
+    "margin-right": 0,
+    "spacing": 0,
+
+    "include": [
+        "~/.config/waybar-ml4w/modules.json"
+    ],
+
+    "modules-left": [
+        "custom/appmenu",
+        "hyprland/workspaces",
+        "custom/empty"
+    ],
+
+    "modules-center": [
+        "hyprland/window",
+        "custom/empty"
+    ],
+
+    "modules-right": [
+        "custom/updates",
+        "pulseaudio",
+        // "bluetooth" removido: esta maquina nao tem controlador Bluetooth
+        //   (waybar avisava "no bluetooth controller found" e o modulo ficava
+        //   invisivel ocupando espaco na config).
+        "network",
+        // "battery" removido: e' um desktop. O unico /sys/class/power_supply
+        //   e' o hidpp_battery_0 (teclado Logitech K400 Plus), que a waybar
+        //   nao enxerga como bateria -- avisava "No batteries." e sumia.
+        "group/hardware",
+        "group/tools",
+        "tray",
+        "custom/notification",
+        "custom/exit",
+        "clock"
+    ]
+}

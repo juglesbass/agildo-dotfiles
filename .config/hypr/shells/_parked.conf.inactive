@@ -1,0 +1,21 @@
+# ===== REGRAS PARQUEADAS (arquivo NAO e' sourced) ========================
+# Extensao .inactive de proposito: nada aqui esta em uso.
+#
+# Estas regras estavam soltas no hyprland.conf apontando para shells que nao
+# rodam mais neste setup. Nao quebravam nada -- windowrule/layerrule para uma
+# classe inexistente e' simplesmente ignorada -- mas poluiam o arquivo e davam
+# a impressao de que aqueles shells ainda faziam parte da rotacao.
+#
+# Os dois binarios CONTINUAM instalados (/usr/bin/noctalia, /usr/bin/hyprpanel).
+# Se um dia voltar a usar qualquer um deles, mova o bloco correspondente para
+# um <nome>.conf de verdade e acrescente o nome ao array SHELLS do
+# ~/.local/bin/switch-shell.sh.
+
+# ----- noctalia -----
+layerrule = blur on, match:namespace noctalia-.*
+
+# ----- hyprpanel -----
+# Corrigem o offset do mouse na janela de configuracoes do HyprPanel.
+windowrule = float 1, match:class ^(hyprpanel-settings|gjs)$
+windowrule = center 1, match:class ^(hyprpanel-settings|gjs)$
+windowrule = border_size 0, match:class ^(hyprpanel-settings|gjs)$
