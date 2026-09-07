@@ -33,6 +33,10 @@ ShellRoot {
     property int   panelWidth:    250     // largura do bloco de sensores
     property int   statsGap:      34      // espaco entre o relogio e os sensores
     property int   statsInterval: 3000    // ms entre leituras dos sensores
+    property int   marginLeft:    70      // distancia da esquerda (widget do tempo)
+    property int   weatherInterval: 300000 // 5 min; o script tem cache propria de 10 min
+    property int   tempSize:      72      // tamanho da temperatura
+    property int   iconSize:      58      // tamanho do icone de condicao
     property int   tempMin:       35      // inicio da escala de temperatura (°C)
     property int   tempMax:       90      // fim da escala de temperatura (°C)
     // ------------------------------------------------------------------------
@@ -102,6 +106,86 @@ ShellRoot {
         onTriggered: statsProc.running = true
     }
 
+    // ---- Tempo ----------------------------------------------------------
+    property bool   wxOk:    false
+    property int    wxTemp:  0
+    property int    wxFeels: 0
+    property int    wxMin:   0
+    property int    wxMax:   0
+    property int    wxHum:   0
+    property int    wxCode:  -1
+    property bool   wxDay:   true
+    property string wxCity:  ""
+
+    Process {
+        id: wxProc
+        command: ["/bin/bash", Quickshell.env("HOME") + "/.local/bin/desktop-weather.sh"]
+        running: false
+        stdout: StdioCollector {
+            onStreamFinished: {
+                try {
+                    const d = JSON.parse(text);
+                    if (!d.ok) return;          // mantem a ultima leitura boa
+                    root.wxOk    = true;
+                    root.wxTemp  = d.temp;
+                    root.wxFeels = d.feels;
+                    root.wxMin   = d.tmin;
+                    root.wxMax   = d.tmax;
+                    root.wxHum   = d.humidity || 0;
+                    root.wxCode  = (d.code === null || d.code === undefined) ? -1 : d.code;
+                    root.wxDay   = !!d.isDay;
+                    root.wxCity  = d.city || "";
+                } catch (e) {
+                    // Rede em baixo ou resposta truncada: fica o que ja' estava.
+                }
+            }
+        }
+    }
+
+    Timer {
+        interval: root.weatherInterval
+        running: true
+        repeat: true
+        triggeredOnStart: true
+        onTriggered: wxProc.running = true
+    }
+
+    // Codigos WMO do Open-Meteo -> icone (Material Symbols) e descricao.
+    // A tabela vive aqui, e nao no script, porque e' apresentacao: o script
+    // devolve dados crus e nao precisa de saber que fonte de icones se usa.
+    function wxIcon(code, day) {
+        if (code < 0) return "cloud";
+        if (code === 0 || code === 1) return day ? "clear_day" : "clear_night";
+        if (code === 2)               return day ? "partly_cloudy_day" : "partly_cloudy_night";
+        if (code === 3)               return "cloud";
+        if (code === 45 || code === 48) return "foggy";
+        if (code >= 71 && code <= 77)   return "weather_snowy";
+        if (code === 85 || code === 86) return "weather_snowy";
+        if (code >= 95)                 return "thunderstorm";
+        return "rainy";
+    }
+
+    function wxText(code) {
+        switch (code) {
+        case 0:  return "Céu limpo";
+        case 1:  return "Predominantemente limpo";
+        case 2:  return "Parcialmente nublado";
+        case 3:  return "Encoberto";
+        case 45: case 48: return "Nevoeiro";
+        case 51: case 53: case 55: return "Chuvisco";
+        case 56: case 57: return "Chuvisco gelado";
+        case 61: case 63: case 65: return "Chuva";
+        case 66: case 67: return "Chuva gelada";
+        case 71: case 73: case 75: return "Neve";
+        case 77: return "Grãos de neve";
+        case 80: case 81: case 82: return "Aguaceiros";
+        case 85: case 86: return "Aguaceiros de neve";
+        case 95: return "Trovoada";
+        case 96: case 99: return "Trovoada com granizo";
+        default: return "--";
+        }
+    }
+
     SystemClock {
         id: clock
         precision: root.showSeconds ? SystemClock.Seconds : SystemClock.Minutes
@@ -127,6 +211,92 @@ ShellRoot {
         { label: "GPU", text: gpuTemp < 0 ? "--" : gpuTemp + "°", norm: normTemp(gpuTemp) },
         { label: "RAM", text: ramPct  < 0 ? "--" : ramPct  + "%", norm: ramPct < 0 ? 0 : ramPct / 100 }
     ]
+
+    // ======================= TEMPO (canto superior esquerdo) ==============
+    Variants {
+        model: Quickshell.screens
+
+        PanelWindow {
+            required property var modelData
+
+            screen: modelData
+            WlrLayershell.namespace: "desktop-widgets"
+            WlrLayershell.layer: WlrLayer.Bottom
+            WlrLayershell.exclusionMode: ExclusionMode.Ignore
+            color: "transparent"
+
+            anchors.top: true
+            anchors.left: true
+            margins.top: root.marginTop
+            margins.left: root.marginLeft
+
+            implicitWidth: wx.implicitWidth
+            implicitHeight: wx.implicitHeight
+
+            mask: Region {}
+
+            Column {
+                id: wx
+                anchors.centerIn: parent
+                spacing: 2
+
+                // Icone + temperatura, alinhados pela base para o simbolo
+                // assentar na linha dos digitos em vez de flutuar.
+                Row {
+                    spacing: 14
+
+                    Text {
+                        anchors.bottom: parent.bottom
+                        anchors.bottomMargin: root.tempSize * 0.18
+                        text: root.wxIcon(root.wxCode, root.wxDay)
+                        color: root.colFill
+                        font.family: "Material Symbols Rounded"
+                        font.pixelSize: root.iconSize
+                        renderType: Text.NativeRendering
+                        style: Text.Raised
+                        styleColor: "#66000000"
+                    }
+
+                    Text {
+                        text: root.wxOk ? root.wxTemp + "°" : "--"
+                        color: root.colTime
+                        font.family: "SF Pro Display"
+                        font.pixelSize: root.tempSize
+                        font.weight: Font.Light
+                        renderType: Text.NativeRendering
+                        style: Text.Raised
+                        styleColor: "#66000000"
+                    }
+                }
+
+                Text {
+                    text: root.wxText(root.wxCode) + (root.wxCity ? "  ·  " + root.wxCity : "")
+                    color: root.colLabel
+                    font.family: "SF Pro Text"
+                    font.pixelSize: root.dateSize
+                    renderType: Text.NativeRendering
+                    style: Text.Raised
+                    styleColor: "#66000000"
+                }
+
+                Text {
+                    visible: root.wxOk
+                    topPadding: 6
+                    text: "sensação " + root.wxFeels + "°     "
+                          + root.wxMin + "° / " + root.wxMax + "°     "
+                          + root.wxHum + "%"
+                    color: root.colLabel
+                    opacity: 0.75
+                    font.family: "SF Pro Text"
+                    font.pixelSize: 14
+                    font.letterSpacing: 0.4
+                    renderType: Text.NativeRendering
+                    style: Text.Raised
+                    styleColor: "#66000000"
+                }
+            }
+        }
+    }
 
     Variants {
         model: Quickshell.screens

@@ -24,3 +24,6 @@
 
 # Gerado do wallpaper pelo waybar-ml4w-colors.sh a cada troca.
 .config/waybar-ml4w/colors.css
+
+# Cache do widget de tempo (localizacao e ultima leitura).
+.cache/desktop-weather/
