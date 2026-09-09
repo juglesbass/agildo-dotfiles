@@ -1,103 +1,107 @@
 {
-    "appearance": {
-        "transparency": {
-            "enabled": false
-        }
-    },
-    "background": {
-        "wallpaperEnabled": false
-    },
-    "bar": {
-        "activeWindow": {
-            "compact": true,
-            "inverted": true
-        },
-        "clock": {
-            "background": false,
-            "showDate": true
-        },
-        "dragThreshold": 20,
-        "persistent": true,
-        "popouts": {
-            "statusIcons": true
-        },
-        "scrollActions": {
-            "brightness": true,
-            "volume": true,
-            "workspaces": true
-        },
-        "showOnHover": true,
-        "statusIcons": [
-            {
-                "enabled": true,
-                "id": "lockStatus"
-            },
-            {
-                "enabled": true,
-                "id": "audio"
-            },
-            {
-                "enabled": false,
-                "id": "microphone"
-            },
-            {
-                "enabled": true,
-                "id": "kbLayout"
-            },
-            {
-                "enabled": true,
-                "id": "network"
-            },
-            {
-                "enabled": false,
-                "id": "bluetooth"
-            },
-            {
-                "enabled": false,
-                "id": "battery"
-            }
-        ],
-        "tray": {
-            "background": false,
-            "compact": false,
-            "recolour": false
-        },
-        "workspaces": {
-            "activeTrail": false,
-            "maxWindowIcons": 0,
-            "occupiedBg": false,
-            "shown": 1
-        }
-    },
-    "border": {
-        "rounding": 10,
-        "thickness": 0
-    },
-    "dashboard": {
-        "enabled": true,
-        "showOnHover": true
-    },
-    "general": {
-        "apps": {
-            "explorer": [
-                "dolphin"
-            ],
-            "terminal": [
-                "konsole"
-            ]
-        }
-    },
-    "launcher": {
-        "actionPrefix": ">",
-        "enableDangerousActions": true,
-        "enabled": true,
-        "showOnHover": false,
-        "vimKeybinds": true
-    },
-    "paths": {
-        "wallpaperDir": "/home/agildo/Pictures/Wallpapers/Hyprland"
-    },
-    "services": {
-        "smartScheme": true
+  "appearance": {
+    "transparency": {
+      "enabled": false
     }
+  },
+  "background": {
+    "wallpaperEnabled": false
+  },
+  "bar": {
+    "activeWindow": {
+      "compact": true,
+      "inverted": true
+    },
+    "clock": {
+      "background": false,
+      "showDate": true
+    },
+    "dragThreshold": 20,
+    "persistent": false,
+    "popouts": {
+      "statusIcons": true
+    },
+    "scrollActions": {
+      "brightness": true,
+      "volume": true,
+      "workspaces": true
+    },
+    "showOnHover": true,
+    "statusIcons": [
+      {
+        "enabled": true,
+        "id": "lockStatus"
+      },
+      {
+        "enabled": true,
+        "id": "audio"
+      },
+      {
+        "enabled": false,
+        "id": "microphone"
+      },
+      {
+        "enabled": true,
+        "id": "kbLayout"
+      },
+      {
+        "enabled": true,
+        "id": "network"
+      },
+      {
+        "enabled": false,
+        "id": "bluetooth"
+      },
+      {
+        "enabled": false,
+        "id": "battery"
+      }
+    ],
+    "tray": {
+      "background": false,
+      "compact": false,
+      "recolour": false
+    },
+    "workspaces": {
+      "activeTrail": false,
+      "maxWindowIcons": 0,
+      "occupiedBg": false,
+      "shown": 1
+    }
+  },
+  "border": {
+    "rounding": 10,
+    "thickness": 0
+  },
+  "dashboard": {
+    "enabled": true,
+    "showOnHover": true
+  },
+  "general": {
+    "apps": {
+      "explorer": [
+        "dolphin"
+      ],
+      "terminal": [
+        "konsole"
+      ]
+    },
+    "idle": {
+      "timeouts": [],
+      "lockBeforeSleep": true
+    }
+  },
+  "launcher": {
+    "actionPrefix": ">",
+    "enableDangerousActions": true,
+    "enabled": true,
+    "showOnHover": false,
+    "vimKeybinds": true
+  },
+  "paths": {
+    "wallpaperDir": "/home/agildo/Pictures/Wallpapers/Hyprland"
+  },
+  "services": {
+    "smartScheme": true
+  }
 }
